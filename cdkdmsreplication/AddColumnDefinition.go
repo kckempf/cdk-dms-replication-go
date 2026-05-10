@@ -13,11 +13,15 @@ type AddColumnDefinition struct {
 	ColumnPrecision *float64 `field:"optional" json:"columnPrecision" yaml:"columnPrecision"`
 	// Scale for numeric columns.
 	ColumnScale *float64 `field:"optional" json:"columnScale" yaml:"columnScale"`
-	// Constant value to populate the column with.
+	// Constant string value to populate the column with.
 	//
+	// Emitted as a
+	// single-quoted DMS expression literal — use only for string column types.
+	// For numeric or datetime types, use `expression` with an unquoted literal
+	// (e.g. `expression: '42'`).
 	// Exactly one of `columnValue` or `expression` must be set.
 	ColumnValue *string `field:"optional" json:"columnValue" yaml:"columnValue"`
-	// Expression (e.g. `$timestamp`) to populate the column. Exactly one of `columnValue` or `expression` must be set.
+	// DMS expression to populate the column (e.g. `$timestamp`, `'ENTITY#' || $id`, or an unquoted numeric literal like `42`). Exactly one of `columnValue` or `expression` must be set.
 	Expression *string `field:"optional" json:"expression" yaml:"expression"`
 }
 
