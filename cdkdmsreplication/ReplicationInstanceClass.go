@@ -7,7 +7,6 @@ package cdkdmsreplication
 type ReplicationInstanceClass string
 
 const (
-	ReplicationInstanceClass_T3_MICRO ReplicationInstanceClass = "T3_MICRO"
 	ReplicationInstanceClass_T3_SMALL ReplicationInstanceClass = "T3_SMALL"
 	ReplicationInstanceClass_T3_MEDIUM ReplicationInstanceClass = "T3_MEDIUM"
 	ReplicationInstanceClass_T3_LARGE ReplicationInstanceClass = "T3_LARGE"
@@ -30,13 +29,13 @@ const (
 	ReplicationInstanceClass_C6I_32XLARGE ReplicationInstanceClass = "C6I_32XLARGE"
 	ReplicationInstanceClass_C7I_LARGE ReplicationInstanceClass = "C7I_LARGE"
 	ReplicationInstanceClass_C7I_XLARGE ReplicationInstanceClass = "C7I_XLARGE"
-	ReplicationInstanceClass_X7I_2XLARGE ReplicationInstanceClass = "X7I_2XLARGE"
-	ReplicationInstanceClass_X7I_4XLARGE ReplicationInstanceClass = "X7I_4XLARGE"
-	ReplicationInstanceClass_X7I_8XLARGE ReplicationInstanceClass = "X7I_8XLARGE"
-	ReplicationInstanceClass_X7I_12XLARGE ReplicationInstanceClass = "X7I_12XLARGE"
-	ReplicationInstanceClass_X7I_16XLARGE ReplicationInstanceClass = "X7I_16XLARGE"
-	ReplicationInstanceClass_X7I_24XLARGE ReplicationInstanceClass = "X7I_24XLARGE"
-	ReplicationInstanceClass_X7I_48XLARGE ReplicationInstanceClass = "X7I_48XLARGE"
+	ReplicationInstanceClass_C7I_2XLARGE ReplicationInstanceClass = "C7I_2XLARGE"
+	ReplicationInstanceClass_C7I_4XLARGE ReplicationInstanceClass = "C7I_4XLARGE"
+	ReplicationInstanceClass_C7I_8XLARGE ReplicationInstanceClass = "C7I_8XLARGE"
+	ReplicationInstanceClass_C7I_12XLARGE ReplicationInstanceClass = "C7I_12XLARGE"
+	ReplicationInstanceClass_C7I_16XLARGE ReplicationInstanceClass = "C7I_16XLARGE"
+	ReplicationInstanceClass_C7I_24XLARGE ReplicationInstanceClass = "C7I_24XLARGE"
+	ReplicationInstanceClass_C7I_48XLARGE ReplicationInstanceClass = "C7I_48XLARGE"
 	ReplicationInstanceClass_R5_LARGE ReplicationInstanceClass = "R5_LARGE"
 	ReplicationInstanceClass_R5_XLARGE ReplicationInstanceClass = "R5_XLARGE"
 	ReplicationInstanceClass_R5_2XLARGE ReplicationInstanceClass = "R5_2XLARGE"
