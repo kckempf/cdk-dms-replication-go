@@ -4,7 +4,6 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/kckempf/cdk-dms-replication-go/cdkdmsreplication/jsii"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/kckempf/cdk-dms-replication-go/cdkdmsreplication/internal"
@@ -47,14 +46,14 @@ import (
 //
 type DmsMigrationPipeline interface {
 	constructs.Construct
-	// IAM role that allows DMS to write to CloudWatch Logs.
+	// Construct wrapping the custom resources that created the `dms-cloudwatch-logs-role`.
 	//
 	// `undefined` when `createDmsServiceRoles` is `false`.
-	DmsCloudWatchRole() awsiam.Role
-	// IAM role that allows DMS to manage VPC resources (dms-vpc-role).
+	DmsCloudWatchRole() constructs.Construct
+	// Construct wrapping the custom resources that created the `dms-vpc-role`.
 	//
 	// `undefined` when `createDmsServiceRoles` is `false`.
-	DmsVpcRole() awsiam.Role
+	DmsVpcRole() constructs.Construct
 	// CloudWatch log group for the task (if enableCloudWatchLogs is true).
 	LogGroup() awslogs.LogGroup
 	// The tree node.
@@ -85,8 +84,8 @@ type jsiiProxy_DmsMigrationPipeline struct {
 	internal.Type__constructsConstruct
 }
 
-func (j *jsiiProxy_DmsMigrationPipeline) DmsCloudWatchRole() awsiam.Role {
-	var returns awsiam.Role
+func (j *jsiiProxy_DmsMigrationPipeline) DmsCloudWatchRole() constructs.Construct {
+	var returns constructs.Construct
 	_jsii_.Get(
 		j,
 		"dmsCloudWatchRole",
@@ -95,8 +94,8 @@ func (j *jsiiProxy_DmsMigrationPipeline) DmsCloudWatchRole() awsiam.Role {
 	return returns
 }
 
-func (j *jsiiProxy_DmsMigrationPipeline) DmsVpcRole() awsiam.Role {
-	var returns awsiam.Role
+func (j *jsiiProxy_DmsMigrationPipeline) DmsVpcRole() constructs.Construct {
+	var returns constructs.Construct
 	_jsii_.Get(
 		j,
 		"dmsVpcRole",

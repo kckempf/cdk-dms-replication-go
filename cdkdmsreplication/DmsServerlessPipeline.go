@@ -6,7 +6,6 @@ import (
 
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsdms"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awskms"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/constructs-go/constructs/v10"
@@ -55,14 +54,14 @@ type DmsServerlessPipeline interface {
 	constructs.Construct
 	// The underlying `CfnReplicationConfig` resource.
 	CfnReplicationConfig() awsdms.CfnReplicationConfig
-	// IAM role that allows DMS to write to CloudWatch Logs.
+	// Construct wrapping the custom resources that created the `dms-cloudwatch-logs-role`.
 	//
 	// `undefined` when `createDmsServiceRoles` is `false`.
-	DmsCloudWatchRole() awsiam.Role
-	// IAM role that allows DMS to manage VPC resources (dms-vpc-role).
+	DmsCloudWatchRole() constructs.Construct
+	// Construct wrapping the custom resources that created the `dms-vpc-role`.
 	//
 	// `undefined` when `createDmsServiceRoles` is `false`.
-	DmsVpcRole() awsiam.Role
+	DmsVpcRole() constructs.Construct
 	// The KMS key used for storage encryption.
 	EncryptionKey() awskms.IKey
 	// CloudWatch log group for the replication config (if enableCloudWatchLogs is true).
@@ -107,8 +106,8 @@ func (j *jsiiProxy_DmsServerlessPipeline) CfnReplicationConfig() awsdms.CfnRepli
 	return returns
 }
 
-func (j *jsiiProxy_DmsServerlessPipeline) DmsCloudWatchRole() awsiam.Role {
-	var returns awsiam.Role
+func (j *jsiiProxy_DmsServerlessPipeline) DmsCloudWatchRole() constructs.Construct {
+	var returns constructs.Construct
 	_jsii_.Get(
 		j,
 		"dmsCloudWatchRole",
@@ -117,8 +116,8 @@ func (j *jsiiProxy_DmsServerlessPipeline) DmsCloudWatchRole() awsiam.Role {
 	return returns
 }
 
-func (j *jsiiProxy_DmsServerlessPipeline) DmsVpcRole() awsiam.Role {
-	var returns awsiam.Role
+func (j *jsiiProxy_DmsServerlessPipeline) DmsVpcRole() constructs.Construct {
+	var returns constructs.Construct
 	_jsii_.Get(
 		j,
 		"dmsVpcRole",
