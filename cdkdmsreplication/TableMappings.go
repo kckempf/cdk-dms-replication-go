@@ -52,6 +52,53 @@ type TableMappings interface {
 	//
 	// Use `%` for `tableName` to match all tables in the schema.
 	IncludeTable(schemaName *string, tableName *string) TableMappings
+	// Map a relational source table to a DynamoDB target table.
+	//
+	// Emits a DMS `object-mapping` rule with `rule-action: map-record-to-record`.
+	// DMS requires this rule type when the target endpoint is DynamoDB; the
+	// partition key (and optional sort key) tell DMS how to build the item key
+	// from source columns.
+	//
+	// Source columns not listed in `attributeMappings` or `excludeColumns` are
+	// migrated with the source column name as the attribute name.
+	//
+	// For each key or attribute mapping, set either `sourceColumn` (a single
+	// column wrapped as `${col}`) or `value` (a raw DMS expression, e.g.
+	// `'CUSTOMER#${customer_id}'` for composite keys). Exactly one is required.
+	//
+	// Calling this method twice with the same `schemaName`/`tableName` emits two
+	// separate rules; DMS will reject duplicate object-mapping rules at deploy
+	// time. Call it once per source table.
+	//
+	// Example:
+	//   const mappings = new TableMappings()
+	//     .includeTable('public', 'orders')
+	//     .mapToDynamoDb('public', 'orders', {
+	//       targetTableName: 'Orders',
+	//       // Composite partition key from a literal prefix + source column:
+	//       partitionKey: {
+	//         value: 'CUSTOMER#${customer_id}',
+	//         targetAttributeName: 'PK',
+	//         attributeSubType: DynamoDbAttributeSubType.STRING,
+	//       },
+	//       // Bare source column for the sort key:
+	//       sortKey: {
+	//         sourceColumn: 'created_at',
+	//         targetAttributeName: 'CreatedAt',
+	//         attributeSubType: DynamoDbAttributeSubType.STRING,
+	//       },
+	//       excludeColumns: ['internal_flag'],
+	//       attributeMappings: [
+	//         {
+	//           sourceColumn: 'customer_id',
+	//           targetAttributeName: 'CustomerId',
+	//           attributeSubType: DynamoDbAttributeSubType.STRING,
+	//         },
+	//       ],
+	//     })
+	//     .toJson();
+	//
+	MapToDynamoDb(schemaName *string, tableName *string, options *DynamoDbObjectMappingOptions) TableMappings
 	// Remove a column from a table.
 	RemoveColumn(schemaName *string, tableName *string, columnName *string) TableMappings
 	// Rename a column in a table.
@@ -264,6 +311,22 @@ func (t *jsiiProxy_TableMappings) IncludeTable(schemaName *string, tableName *st
 		t,
 		"includeTable",
 		[]interface{}{schemaName, tableName},
+		&returns,
+	)
+
+	return returns
+}
+
+func (t *jsiiProxy_TableMappings) MapToDynamoDb(schemaName *string, tableName *string, options *DynamoDbObjectMappingOptions) TableMappings {
+	if err := t.validateMapToDynamoDbParameters(schemaName, tableName, options); err != nil {
+		panic(err)
+	}
+	var returns TableMappings
+
+	_jsii_.Invoke(
+		t,
+		"mapToDynamoDb",
+		[]interface{}{schemaName, tableName, options},
 		&returns,
 	)
 

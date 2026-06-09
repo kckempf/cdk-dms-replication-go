@@ -175,6 +175,27 @@ func init() {
 		reflect.TypeOf((*DmsServerlessPipelineProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterStruct(
+		"cdk-dms-replication.DynamoDbAttributeMapping",
+		reflect.TypeOf((*DynamoDbAttributeMapping)(nil)).Elem(),
+	)
+	_jsii_.RegisterEnum(
+		"cdk-dms-replication.DynamoDbAttributeSubType",
+		reflect.TypeOf((*DynamoDbAttributeSubType)(nil)).Elem(),
+		map[string]interface{}{
+			"STRING": DynamoDbAttributeSubType_STRING,
+			"NUMBER": DynamoDbAttributeSubType_NUMBER,
+			"BINARY": DynamoDbAttributeSubType_BINARY,
+		},
+	)
+	_jsii_.RegisterStruct(
+		"cdk-dms-replication.DynamoDbKeyMapping",
+		reflect.TypeOf((*DynamoDbKeyMapping)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
+		"cdk-dms-replication.DynamoDbObjectMappingOptions",
+		reflect.TypeOf((*DynamoDbObjectMappingOptions)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
 		"cdk-dms-replication.DynamoDbSettings",
 		reflect.TypeOf((*DynamoDbSettings)(nil)).Elem(),
 	)
@@ -548,6 +569,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "explicitTable", GoMethod: "ExplicitTable"},
 			_jsii_.MemberMethod{JsiiMethod: "includeSchema", GoMethod: "IncludeSchema"},
 			_jsii_.MemberMethod{JsiiMethod: "includeTable", GoMethod: "IncludeTable"},
+			_jsii_.MemberMethod{JsiiMethod: "mapToDynamoDb", GoMethod: "MapToDynamoDb"},
 			_jsii_.MemberMethod{JsiiMethod: "removeColumn", GoMethod: "RemoveColumn"},
 			_jsii_.MemberMethod{JsiiMethod: "renameColumn", GoMethod: "RenameColumn"},
 			_jsii_.MemberMethod{JsiiMethod: "renameSchema", GoMethod: "RenameSchema"},

@@ -44,6 +44,10 @@ func (t *jsiiProxy_TableMappings) validateIncludeTableParameters(schemaName *str
 	return nil
 }
 
+func (t *jsiiProxy_TableMappings) validateMapToDynamoDbParameters(schemaName *string, tableName *string, options *DynamoDbObjectMappingOptions) error {
+	return nil
+}
+
 func (t *jsiiProxy_TableMappings) validateRemoveColumnParameters(schemaName *string, tableName *string, columnName *string) error {
 	return nil
 }

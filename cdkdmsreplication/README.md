@@ -396,6 +396,10 @@ targetEndpoint: {
 },
 ```
 
+DynamoDB targets also require an `object-mapping` rule per source table in the
+table mappings. See [DynamoDB target (object mapping)](#dynamodb-target-object-mapping)
+below.
+
 ---
 
 
@@ -448,6 +452,71 @@ new TableMappings()
   })
   .toJson()
 ```
+
+### DynamoDB target (object mapping)
+
+When the target endpoint is DynamoDB, DMS requires an `object-mapping` rule per
+source table that defines the partition key (and optionally a sort key) and
+how source columns become DynamoDB attributes. Use `mapToDynamoDb()` alongside
+the usual `includeTable()`:
+
+```go
+new TableMappings()
+  .includeTable('public', 'orders')
+  .mapToDynamoDb('public', 'orders', {
+    targetTableName: 'Orders',
+    partitionKey: {
+      sourceColumn: 'order_id',
+      targetAttributeName: 'OrderId',
+      attributeSubType: DynamoDbAttributeSubType.STRING,
+    },
+    sortKey: {
+      sourceColumn: 'created_at',
+      targetAttributeName: 'CreatedAt',
+      attributeSubType: DynamoDbAttributeSubType.STRING,
+    },
+    excludeColumns: ['internal_flag'],
+    attributeMappings: [
+      {
+        sourceColumn: 'customer_id',
+        targetAttributeName: 'CustomerId',
+        attributeSubType: DynamoDbAttributeSubType.STRING,
+      },
+    ],
+  })
+  .toJson()
+```
+
+Source columns not listed in `attributeMappings` or `excludeColumns` are
+migrated under their source column name.
+
+#### Composite key values
+
+For DynamoDB single-table designs you often need composite keys built from a
+literal prefix plus one or more source columns. Use `value` instead of
+`sourceColumn` to provide a raw DMS expression:
+
+```go
+new TableMappings()
+  .includeTable('public', 'orders')
+  .mapToDynamoDb('public', 'orders', {
+    targetTableName: 'AppTable',
+    partitionKey: {
+      value: 'CUSTOMER#${customer_id}',
+      targetAttributeName: 'PK',
+      attributeSubType: DynamoDbAttributeSubType.STRING,
+    },
+    sortKey: {
+      value: 'ORDER#${order_id}',
+      targetAttributeName: 'SK',
+      attributeSubType: DynamoDbAttributeSubType.STRING,
+    },
+  })
+  .toJson()
+```
+
+Exactly one of `sourceColumn` or `value` must be set on each key/attribute
+mapping — the builder throws at synth time otherwise.
 
 ---
 

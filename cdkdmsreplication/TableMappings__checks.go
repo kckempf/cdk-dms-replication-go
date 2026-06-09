@@ -135,6 +135,25 @@ func (t *jsiiProxy_TableMappings) validateIncludeTableParameters(schemaName *str
 	return nil
 }
 
+func (t *jsiiProxy_TableMappings) validateMapToDynamoDbParameters(schemaName *string, tableName *string, options *DynamoDbObjectMappingOptions) error {
+	if schemaName == nil {
+		return fmt.Errorf("parameter schemaName is required, but nil was provided")
+	}
+
+	if tableName == nil {
+		return fmt.Errorf("parameter tableName is required, but nil was provided")
+	}
+
+	if options == nil {
+		return fmt.Errorf("parameter options is required, but nil was provided")
+	}
+	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (t *jsiiProxy_TableMappings) validateRemoveColumnParameters(schemaName *string, tableName *string, columnName *string) error {
 	if schemaName == nil {
 		return fmt.Errorf("parameter schemaName is required, but nil was provided")
