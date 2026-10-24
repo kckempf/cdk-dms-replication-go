@@ -9,6 +9,8 @@ type S3Settings struct {
 	ServiceAccessRoleArn *string `field:"required" json:"serviceAccessRoleArn" yaml:"serviceAccessRoleArn"`
 	// Whether DMS adds a column name field to CSV output.
 	AddColumnName *bool `field:"optional" json:"addColumnName" yaml:"addColumnName"`
+	// Whether DMS pads string columns in CSV output to their declared length with trailing spaces.
+	AddTrailingPaddingCharacter *bool `field:"optional" json:"addTrailingPaddingCharacter" yaml:"addTrailingPaddingCharacter"`
 	// Folder path prefix within the bucket.
 	BucketFolder *string `field:"optional" json:"bucketFolder" yaml:"bucketFolder"`
 	// Include CDC inserts and updates in the target.
@@ -49,8 +51,17 @@ type S3Settings struct {
 	EncodingType EncodingType `field:"optional" json:"encodingType" yaml:"encodingType"`
 	// Encryption mode for data at rest in S3.
 	EncryptionMode EncryptionMode `field:"optional" json:"encryptionMode" yaml:"encryptionMode"`
+	// AWS account ID expected to own the bucket.
+	//
+	// DMS fails rather than read
+	// from or write to a bucket owned by any other account.
+	// Default: - bucket ownership is not checked.
+	//
+	ExpectedBucketOwner *string `field:"optional" json:"expectedBucketOwner" yaml:"expectedBucketOwner"`
 	// JSON structure defining external tables (for S3 source).
 	ExternalTableDefinition *string `field:"optional" json:"externalTableDefinition" yaml:"externalTableDefinition"`
+	// Whether DMS generates an AWS Glue Data Catalog for the target data, so it can be queried with Athena.
+	GlueCatalogGeneration *bool `field:"optional" json:"glueCatalogGeneration" yaml:"glueCatalogGeneration"`
 	// Number of header rows to ignore in the S3 source.
 	IgnoreHeaderRows *float64 `field:"optional" json:"ignoreHeaderRows" yaml:"ignoreHeaderRows"`
 	// Whether to include the operation column for full-load rows.

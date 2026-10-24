@@ -36,6 +36,10 @@ type DmsServerlessPipelineProps struct {
 	// Default: true.
 	//
 	CreateDmsServiceRoles *bool `field:"optional" json:"createDmsServiceRoles" yaml:"createDmsServiceRoles"`
+	// Custom DNS name servers for the serverless replication, e.g. to resolve on-premises hostnames. Up to four IP addresses.
+	// Default: the VPC's Amazon-provided DNS server.
+	//
+	DnsNameServers *[]*string `field:"optional" json:"dnsNameServers" yaml:"dnsNameServers"`
 	// Whether to create a CloudWatch log group for the replication config.
 	// Default: true.
 	//

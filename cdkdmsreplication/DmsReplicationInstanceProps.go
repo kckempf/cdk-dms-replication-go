@@ -20,6 +20,10 @@ type DmsReplicationInstanceProps struct {
 	// Default: true.
 	//
 	AutoMinorVersionUpgrade *bool `field:"optional" json:"autoMinorVersionUpgrade" yaml:"autoMinorVersionUpgrade"`
+	// Custom DNS name servers for the replication instance, e.g. to resolve on-premises hostnames. Up to four IP addresses.
+	// Default: the VPC's Amazon-provided DNS server.
+	//
+	DnsNameServers *[]*string `field:"optional" json:"dnsNameServers" yaml:"dnsNameServers"`
 	// Replication engine version.
 	// Default: latest version available in the region (chosen by DMS).
 	//
@@ -32,6 +36,10 @@ type DmsReplicationInstanceProps struct {
 	// Default: false.
 	//
 	MultiAz *bool `field:"optional" json:"multiAz" yaml:"multiAz"`
+	// IP addressing mode for the replication instance.
+	// Default: NetworkType.IPV4 (chosen by DMS)
+	//
+	NetworkType NetworkType `field:"optional" json:"networkType" yaml:"networkType"`
 	// Preferred maintenance window, e.g. "sun:04:00-sun:04:30".
 	PreferredMaintenanceWindow *string `field:"optional" json:"preferredMaintenanceWindow" yaml:"preferredMaintenanceWindow"`
 	// Whether the replication instance is publicly accessible.

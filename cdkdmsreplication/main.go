@@ -381,6 +381,14 @@ func init() {
 		"cdk-dms-replication.NeptuneSettings",
 		reflect.TypeOf((*NeptuneSettings)(nil)).Elem(),
 	)
+	_jsii_.RegisterEnum(
+		"cdk-dms-replication.NetworkType",
+		reflect.TypeOf((*NetworkType)(nil)).Elem(),
+		map[string]interface{}{
+			"IPV4": NetworkType_IPV4,
+			"DUAL": NetworkType_DUAL,
+		},
+	)
 	_jsii_.RegisterStruct(
 		"cdk-dms-replication.OpenSearchSettings",
 		reflect.TypeOf((*OpenSearchSettings)(nil)).Elem(),

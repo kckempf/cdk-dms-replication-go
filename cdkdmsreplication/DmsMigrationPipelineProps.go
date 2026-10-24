@@ -48,6 +48,10 @@ type DmsMigrationPipelineProps struct {
 	// Default: true.
 	//
 	CreateDmsServiceRoles *bool `field:"optional" json:"createDmsServiceRoles" yaml:"createDmsServiceRoles"`
+	// Custom DNS name servers for the replication instance, e.g. to resolve on-premises hostnames. Up to four IP addresses.
+	// Default: the VPC's Amazon-provided DNS server.
+	//
+	DnsNameServers *[]*string `field:"optional" json:"dnsNameServers" yaml:"dnsNameServers"`
 	// Whether to create a CloudWatch log group for the task.
 	// Default: true.
 	//
@@ -76,6 +80,10 @@ type DmsMigrationPipelineProps struct {
 	// Default: false.
 	//
 	MultiAz *bool `field:"optional" json:"multiAz" yaml:"multiAz"`
+	// IP addressing mode for the replication instance.
+	// Default: NetworkType.IPV4 (chosen by DMS)
+	//
+	NetworkType NetworkType `field:"optional" json:"networkType" yaml:"networkType"`
 	// Removal policy applied to all resources in the pipeline.
 	// Default: cdk.RemovalPolicy.DESTROY
 	//
